@@ -5,6 +5,8 @@
   "version": "1.0.4",
   "main": "dist/index.js",
   "license": "MIT",
+  "homepage": "https://github.com/elvisace/analytics-fetch#readme",
+  "repository": "https://github.com/elvisace/analytics-fetch",
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
