@@ -1,7 +1,7 @@
 {
   "extends": "./node_modules/@standardorg/ts-config/tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM", "esnext"],
+    "lib": ["dom"],
     "declaration": true
   }
 }

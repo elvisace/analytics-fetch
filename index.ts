@@ -50,15 +50,15 @@ const analyticsFetchPlugin = (
     name: "analytics-plugin",
     page: ({ payload }: AnyPluginProps) => {
       const url = getUrl("page");
-      postPayload(url, payload, depth, maxDepth)?.then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, depth, maxDepth).then().catch(err => onErr ? onErr(err) : null);
     },
     track: ({ payload }: AnyPluginProps) => {
       const url = getUrl("track");
-      postPayload(url, payload, depth, maxDepth)?.then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, depth, maxDepth).then().catch(err => onErr ? onErr(err) : null);
     },
     identify: ({ payload }: AnyPluginProps) => {
-      const url = getUrl("identifyk");
-      postPayload(url, payload, depth, maxDepth)?.then().catch(err => onErr ? onErr(err) : null);
+      const url = getUrl("identify");
+      postPayload(url, payload, depth, maxDepth).then().catch(err => onErr ? onErr(err) : null);
     },
     loaded: () => true,
   };
