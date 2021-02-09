@@ -42,21 +42,23 @@ const postPayload = (url: string, payload: any, depth?: number, maxDepth?: numbe
 
 export const analyticsPlugin = (
   getUrl: (action: string) => string,
+  depth?: number,
+  maxDepth?: number,
   onErr?: (err: any) => any
 ): AnalyticsPlugin => {
   const plugin: AnalyticsPlugin = {
     name: "analytics-plugin",
     page: ({ payload }: AnyPluginProps) => {
       const url = getUrl("page");
-      postPayload(url, payload)?.then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, depth, maxDepth)?.then().catch(err => onErr ? onErr(err) : null);
     },
     track: ({ payload }: AnyPluginProps) => {
       const url = getUrl("track");
-      postPayload(url, payload)?.then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, depth, maxDepth)?.then().catch(err => onErr ? onErr(err) : null);
     },
     identify: ({ payload }: AnyPluginProps) => {
       const url = getUrl("identifyk");
-      postPayload(url, payload)?.then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, depth, maxDepth)?.then().catch(err => onErr ? onErr(err) : null);
     },
     loaded: () => true,
   };
