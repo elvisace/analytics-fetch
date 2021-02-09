@@ -2,7 +2,7 @@
   "name": "@standardorg/analytics-fetch",
   "description": "Analytics fetch",
   "author": "Juan Garcia",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "license": "MIT",
   "devDependencies": {
