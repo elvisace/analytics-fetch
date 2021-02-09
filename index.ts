@@ -40,7 +40,7 @@ const postPayload = (url: string, payload: any, depth?: number, maxDepth?: numbe
     maxDepth
   );
 
-export const analyticsPlugin = (
+const analyticsFetchPlugin = (
   getUrl: (action: string) => string,
   depth?: number,
   maxDepth?: number,
@@ -66,3 +66,4 @@ export const analyticsPlugin = (
   return plugin;
 };
 
+export default analyticsFetchPlugin;
