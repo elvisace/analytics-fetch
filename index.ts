@@ -2,7 +2,7 @@ import { AnalyticsPlugin } from "analytics";
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-const fetchRetry = async (url: string, options: RequestInit, depth = 0, maxDepth = 3): Promise<void> => {
+const fetchRetry = async (url: string, options: RequestInit, maxDepth = 3, depth = 0): Promise<void> => {
   try {
     await fetch(url, options);
   } catch (err) {
@@ -11,7 +11,7 @@ const fetchRetry = async (url: string, options: RequestInit, depth = 0, maxDepth
     }
     await wait(2 ** depth * 20);
 
-    return fetchRetry(url, options, depth + 1, maxDepth);
+    return fetchRetry(url, options, maxDepth, depth + 1);
   }
 };
 
@@ -26,7 +26,7 @@ type AnyPluginProps = {
 };
 
 // return object for analytics to use
-const postPayload = (url: string, payload: any, depth?: number, maxDepth?: number) =>
+const postPayload = (url: string, payload: any, maxDepth?: number) =>
   fetchRetry(
     url,
     {
@@ -36,13 +36,11 @@ const postPayload = (url: string, payload: any, depth?: number, maxDepth?: numbe
       },
       body: JSON.stringify(payload),
     },
-    depth,
     maxDepth
   );
 
 const analyticsFetchPlugin = (
   getUrl: (action: string) => string,
-  depth?: number,
   maxDepth?: number,
   onErr?: (err: any) => any
 ): AnalyticsPlugin => {
@@ -50,15 +48,15 @@ const analyticsFetchPlugin = (
     name: "analytics-plugin",
     page: ({ payload }: AnyPluginProps) => {
       const url = getUrl("page");
-      postPayload(url, payload, depth, maxDepth).then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, maxDepth).then().catch(err => onErr ? onErr(err) : null);
     },
     track: ({ payload }: AnyPluginProps) => {
       const url = getUrl("track");
-      postPayload(url, payload, depth, maxDepth).then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, maxDepth).then().catch(err => onErr ? onErr(err) : null);
     },
     identify: ({ payload }: AnyPluginProps) => {
       const url = getUrl("identify");
-      postPayload(url, payload, depth, maxDepth).then().catch(err => onErr ? onErr(err) : null);
+      postPayload(url, payload, maxDepth).then().catch(err => onErr ? onErr(err) : null);
     },
     loaded: () => true,
   };
