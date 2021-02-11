@@ -2,3 +2,6 @@ node_modules
 .github
 .npmrc
 .releaserc
+index.ts
+.gitignore
+tsconfig.json
