@@ -5,7 +5,6 @@ const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 const fetchRetry = async (
   url: string,
   options: RequestInit,
-  onErr: (err: any) => void,
   maxDepth = 3,
   depth = 0,
 ): Promise<void> => {
@@ -13,16 +12,17 @@ const fetchRetry = async (
     await fetch(url, options);
   } catch (err) {
     if (depth > maxDepth) {
-      onErr(err);
-      return;
+      throw err;
     }
     await wait(2 ** depth * 20);
-    return fetchRetry(url, options, onErr, maxDepth, depth + 1);
+    return fetchRetry(url, options, maxDepth, depth + 1);
   }
 };
+
 type AnyPluginProps = {
   payload: any;
 };
+
 // return object for analytics to use
 const postPayload = (url: string, payload: any, onErr: (err: any) => void, maxDepth?: number) =>
   fetchRetry(
@@ -34,10 +34,15 @@ const postPayload = (url: string, payload: any, onErr: (err: any) => void, maxDe
       },
       body: JSON.stringify(payload),
     },
-    onErr,
     maxDepth,
   );
+
 export type RestAnalyticsPluginProps = {
+  /**
+   * The name of the plugin
+   * @default "rest-analytics-plugin"
+   */
+  name?: string;
   /**
    * The URL to `fetch` for actions: "page", "track", and "identify"
    */
@@ -50,7 +55,9 @@ export type RestAnalyticsPluginProps = {
   onOk?: (type: "page" | "track" | "identify") => void;
   onErr?: (err: any) => void;
 };
+
 export const restAnalyticsPlugin = ({
+  name = "rest-analytics-plugin",
   getUrl,
   maxDepth,
   onOk = () => void 0,
@@ -66,7 +73,7 @@ export const restAnalyticsPlugin = ({
       return p;
     },
     {
-      name: "rest-analytics-plugin",
+      name,
       loaded: () => true,
     } as AnalyticsPlugin,
   );
