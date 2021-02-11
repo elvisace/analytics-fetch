@@ -68,7 +68,7 @@ export const restAnalyticsPlugin = ({
       p[c] = ({ payload }: AnyPluginProps) => {
         postPayload(getUrl(c), payload, onErr, maxDepth)
           .then(() => onOk(c))
-          .catch((err) => (onErr ? onErr(err) : null));
+          .catch((err) => onErr?.(err));
       };
       return p;
     },
