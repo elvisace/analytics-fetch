@@ -2,7 +2,7 @@
   "name": "@standardorg/analytics-fetch",
   "description": "Analytics fetch",
   "author": "Juan Garcia",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "dist/index.js",
   "license": "MIT",
   "homepage": "https://github.com/elvisace/analytics-fetch#readme",
