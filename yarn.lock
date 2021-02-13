@@ -407,10 +407,10 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@standardorg/ts-config@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@standardorg/ts-config/-/ts-config-1.0.3.tgz#c7d33bbd7dcd5f1116a77c763b2301f3acd7da59"
-  integrity sha512-xHVv8Whjq2nZkCnflZCx75Gc0zxssPyVn0g8DiXWrAmngJbC7cwLl2XFEsXv2y3zTgxqBaCwFaGeBZj+eHaZUw==
+"@standardorg/ts-config@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@standardorg/ts-config/-/ts-config-1.0.4.tgz#b23cf848f46539e83f49ac5cd93e568e75889bdd"
+  integrity sha512-IOAVQyCZ4MPNvVCDrO4WQiweBLAnHIoWBDZ9to5XuWhokEEIjfercraCCVOnjZKV+ouDYFW6gwMbHGHaqo2CHA==
   dependencies:
     typescript "^3.9.6"
 
