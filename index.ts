@@ -24,7 +24,7 @@ type AnyPluginProps = {
 };
 
 // return object for analytics to use
-const postPayload = (url: string, payload: any, onErr: (err: any) => void, maxDepth?: number) =>
+const postPayload = (url: string, payload: any, maxDepth?: number) =>
   fetchRetry(
     url,
     {
@@ -66,7 +66,7 @@ export const restAnalyticsPlugin = ({
   const plugin: AnalyticsPlugin = (["page", "track", "identify"] as const).reduce(
     (p, c) => {
       p[c] = ({ payload }: AnyPluginProps) => {
-        postPayload(getUrl(c), payload, onErr, maxDepth)
+        postPayload(getUrl(c), payload, maxDepth)
           .then(() => onOk(c))
           .catch((err) => onErr?.(err));
       };
