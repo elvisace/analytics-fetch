@@ -91,6 +91,8 @@ const analytics = Analytics({
   plugins: [
     analyticsFetch(
       (action) => `https://my-tracking-url.com/${action}`,
+      3,
+      (err) => console.error(err)
     )
   ]
 })
@@ -124,6 +126,8 @@ const analytics = Analytics({
   plugins: [
     analyticsFetch(
       (action) => `https://my-tracking-url.com/${action}`,
+      3,
+      (err) => console.error(err)
     ),
   ],
 });

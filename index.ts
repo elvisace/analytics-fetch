@@ -1,4 +1,5 @@
 import { AnalyticsPlugin } from "analytics";
+import fetch from 'cross-fetch';
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 

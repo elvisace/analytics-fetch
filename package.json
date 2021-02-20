@@ -37,5 +37,8 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "build": "tsc -p ."
+  },
+  "dependencies": {
+    "cross-fetch": "^3.0.6"
   }
 }
